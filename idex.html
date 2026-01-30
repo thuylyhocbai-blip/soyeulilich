@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dự án web - Vũ Thị Thúy Ly</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--phần trang chủ-->
+<header class="header-nav">
+    <div class="user-menu">
+        <div class="menu-label">
+            <img src="https://img.icons8.com/ios/50/000000/user-male-circle.png" width="20">
+            <span>Tài khoản</span>
+        </div>
+        <div class="dropdown">
+            <a href="#" onclick="showAuth()">Đăng ký/Đăng nhập</a>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="box" id="home">
+        <h1>Chào mừng bạn đã đến với sơ yếu lí lịch</h1>
+        <p>Vui lòng đăng ký hoặc đăng nhập để khai báo vào hồ sơ.</p>
+        <button onclick="showAuth()" >Bắt đầu</button>
+    </div>
+<!-- phần đăng kí-->
+    <div class="box auth-grid hidden" id="auth-page">
+        <div class="auth-col">
+            <h2>ĐĂNG KÝ</h2>
+            <p>Tên tài khoản</p>
+            <input type="text" id="reg-user">
+            <p>Địa chỉ email</p>
+            <input type="email" id="reg-email">
+            <p>Mật khẩu </p>
+            <input type="password" id="reg-pass">
+            <p class="policy">Dữ liệu cá nhân của bạn sẽ được sử dụng để hỗ trợ trải nghiệm</p>
+            <button class="btn-blue" onclick="handleRegister()">ĐĂNG KÝ</button>
+        </div>
+
+        <div class="v-line"></div>
+<!-- phần đăng nhập-->
+        <div class="auth-col">
+            <h2>ĐĂNG NHẬP</h2>
+            <p>Tên tài khoản hoặc email </p>
+            <input type="text" id="login-user">
+            <p>Mật khẩu </p>
+            <input type="password" id="login-pass">
+            <div class="remember">
+                <input type="checkbox"> Ghi nhớ mật khẩu
+            </div>
+            <button class="btn-blue" onclick="handleLogin()">ĐĂNG NHẬP</button>
+        </div>
+    </div>
+<!--phần web sơ yếu lí lịch-->
+    <div class="box hidden" id="profile">
+        <h1 >SƠ YẾU LÝ LỊCH</h1>
+        <div class="avatar-container">
+            <img src="a 1.jpg" class="avatar-4x6" alt="Avatar">
+        </div>
+        <!--phần thông tin bản thân-->
+        <h3>PHẦN 1: THÔNG TIN BẢN THÂN</h3>
+        <div class="row">
+            <div class="input-group"><label>Họ và tên</label><input type="text" id="f-name"></div>
+            <div class="input-group"><label>Ngành học</label><input type="text" id="f-major"></div>
+        </div>
+        <div class="row">
+            <div class="input-group"><label>Giới tính</label><select id="f-gen"><option>Nam</option><option>Nữ</option></select></div>
+            <div class="input-group"><label>Ngày sinh</label><input type="date" id="f-dob"></div>
+        </div>
+        <div class="row">
+            <div class="input-group"><label>Số CCCD</label><input type="text" id="f-cccd"></div>
+            <div class="input-group"><label>Quê quán</label><input type="text" id="f-hometown"></div>
+        </div>
+<!--phần thông tin  gia đình-->
+        <h3>PHẦN 2: THÔNG TIN GIA ĐÌNH</h3>
+        <p><strong>Thông tin Cha:</strong></p>
+        <div class="row">
+            <div class="input-group"><label>Họ tên cha</label><input type="text" id="f-dad-name"></div>
+            <div class="input-group"><label>Ngày sinh cha</label><input type="date" id="f-dad-dob"></div>
+        </div>
+        <div class="row">
+            <div class="input-group"><label>SĐT cha</label><input type="tel" id="f-dad-phone"></div>
+            <div class="input-group"><label>Nghề nghiệp cha</label><input type="text" id="f-dad-job"></div>
+        </div>
+
+        <p><strong>Thông tin Mẹ:</strong></p>
+        <div class="row">
+            <div class="input-group"><label>Họ tên mẹ</label><input type="text" id="f-mom-name"></div>
+            <div class="input-group"><label>Ngày sinh mẹ</label><input type="date" id="f-mom-dob"></div>
+        </div>
+        <div class="row">
+            <div class="input-group"><label>SĐT mẹ</label><input type="tel" id="f-mom-phone"></div>
+            <div class="input-group"><label>Nghề nghiệp mẹ</label><input type="text" id="f-mom-job"></div>
+        </div>
+<!--phần xử lí hồ sơ-->
+        <div class="button-group">
+            <button onclick="saveData()">Lưu hồ sơ</button>
+            <button id="view-btn" class="hidden" style="background: #28a745; color: white;" onclick="showReview()">Xem hồ sơ</button>
+            <button class="secondary" onclick="window.print()">In hồ sơ (PDF)</button>
+            <button class="secondary" onclick="logout()">Đăng xuất</button>
+        </div>
+    </div>
+<!--phần kiểm tra hồ sơ, sửa hồ sơ-->
+    <div class="box hidden" id="review-page">
+        <h1>KIỂM TRA THÔNG TIN</h1>
+        <div id="review-content"></div>
+        <div class="button-group" style="margin-top: 20px;">
+            <button onclick="showProfile()">Sửa hồ sơ</button>
+            <button class="secondary" onclick="showHome()">Quay về</button>
+        </div>
+    </div>
+</div>
+<!--phần phần liên hệ và các thông tin liên quan đến trường-->
+<footer class="bdi-footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4 class="footer-title">LIÊN HỆ</h4>
+            <p><strong>Trụ sở chính:</strong> Số 79 DT 743, KCN Sóng Thần, Bình Hòa, Thuận An, Bình Dương</p>
+            <p>Hotline: 0935 656 603</p>
+            <p>Email: truongtccnbd@gmail.com</p>
+            <p>Website: <a href="https://bdi.edu.vn/" target="_blank">https://bdi.edu.vn/</a></p>
+        </div>
+        <div class="footer-section"><h4 class="footer-title">BẢN ĐỒ</h4><img src="bản đồ.png" class="footer-img"></div>
+        <div class="footer-section"><h4 class="footer-title">ĐÀO TẠO</h4><img src="đào tạo.png" class="footer-img"></div>
+        <div class="footer-section"><h4 class="footer-title">ĐẠI HỌC</h4><img src="đai học.png" class="footer-img"></div>
+        <div class="footer-section"><h4 class="footer-title">CAO ĐẲNG</h4><img src="cao đẳng.png" class="footer-img"></div>
+    </div>
+    <!--phần thông tin của thành viên-->
+    <div class="extra-photo-section">
+    <img src="bth.jpg" alt="Ảnh bản thân" class="bottom-img">
+</div>
+    <p class="author-tag">Vũ Thị Thúy Ly-24N01204</p>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
